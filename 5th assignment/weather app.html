@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="weather.css">
+  <title>Weather App</title>
+</head>
+<body> <center>
+  <div class="container">
+    
+  </div>
+  </center>
+</body>
+<script>
+  let cityName=prompt('Entre city name')
+      const URL=`https://p2pclouds.up.railway.app/v1/learn/weather?city=${cityName}`
+ async function weather() {
+    try {
+      if (cityName!=='') {
+        let resopnse=await fetch(URL);
+      let promise=await resopnse.json();
+      // console.log(promise.current.temp_c);
+      // console.log(promise.current.wind_kph);
+
+      let weather_Update=document.querySelector('.container');
+let temp=document.createElement('h1')
+temp.innerHTML=`Temp:${promise.current.temp_c}&#176`
+
+      weather_Update.appendChild(temp)
+      let wind=document.createElement('p')
+wind.innerHTML=`Wind Speed:${promise.current.wind_kph}Kph`
+
+      weather_Update.appendChild(wind)
+      // wind_kphh.innerHTML=`Wind Speed:${promise.current.wind_kph}Kph`
+      }
+      else{
+        alert('Error')
+      }
+    }catch(error){
+      console.log(`The Error is:${error}`);
+    }
+  }
+  weather()
+
+</script>
+</html>
